@@ -1,7 +1,9 @@
 package pragma.users.domain.usecase;
 
+import pragma.users.domain.api.IEncryptionServicePort;
 import pragma.users.domain.api.IUserServicePort;
-import pragma.users.domain.model.request.UserModelRequest;
+import pragma.users.domain.model.UserModel;
+import pragma.users.domain.spi.IRolePersistencePort;
 import pragma.users.domain.spi.IUserPersistencePort;
 import pragma.users.infraestructure.exceptionService.exceptions.*;
 import pragma.users.infraestructure.out.jpa.entity.User;
@@ -14,14 +16,18 @@ import java.util.regex.Pattern;
 public class UserUseCase implements IUserServicePort {
 
     private final IUserPersistencePort userPersistencePort;
+    private final IEncryptionServicePort encryptionServicePort;
+    private final IRolePersistencePort rolePersistencePort;
 
     // importaciones para email válido
     private static final String EMAIL_REGEX = "^[\\w-\\.]+@[\\w-]+\\.[a-z]{2,}$";
     private static final Pattern EMAIL_PATTERN = Pattern.compile(EMAIL_REGEX, Pattern.CASE_INSENSITIVE);
 
 
-    public UserUseCase(IUserPersistencePort userPersistencePort) {
+    public UserUseCase(IUserPersistencePort userPersistencePort, IEncryptionServicePort encryptionServicePort, IRolePersistencePort rolePersistencePort) {
         this.userPersistencePort = userPersistencePort;
+        this.encryptionServicePort = encryptionServicePort;
+        this.rolePersistencePort = rolePersistencePort;
     }
 
     @Override
@@ -30,24 +36,24 @@ public class UserUseCase implements IUserServicePort {
     }
 
     @Override
-    public void saveUser(UserModelRequest userModelRequest) {
-        if (userPersistencePort.findByEmail(userModelRequest.getEmail()).isPresent()) {
+    public void saveUser(UserModel userModel) {
+        if (userPersistencePort.findByEmail(userModel.getEmail()).isPresent()) {
             throw new UserAlreadyExist();
-        } else if (!validatePhoneNumber(userModelRequest.getPhoneNumber())) {
+        } else if (!validatePhoneNumber(userModel.getPhoneNumber())) {
             throw new PhoneNumberIsNotValid();
-        } else if ( userModelRequest.getPhoneNumber().length()>13 && userModelRequest.getPhoneNumber().length()<10) {
+        } else if ( userModel.getPhoneNumber().length()>13 && userModel.getPhoneNumber().length()<10) {
             throw new PhoneNumberLengthIsNotValid();
-        } else if (userPersistencePort.existsUserByPhoneNumber(userModelRequest.getPhoneNumber())) {
+        } else if (userPersistencePort.existsUserByPhoneNumber(userModel.getPhoneNumber())) {
             throw new PhoneNumberAlreadyIsUse();
-        } else if (!validateOnlyNumber(userModelRequest.getIdentityDocument())) {
+        } else if (!validateOnlyNumber(userModel.getIdentityDocument())) {
             throw new DocumentIdentityOnlyNumeric();
-        } else if (!validateEmail(userModelRequest.getEmail())) {
+        } else if (!validateEmail(userModel.getEmail())) {
             throw new EmailIsNotValid();
-        } else if (!isAdultValidate(userModelRequest.getBirthDate())) {
+        } else if (!isAdultValidate(userModel.getBirthDate())) {
             throw new UserIsNotAdult();
 
         } else {
-            userPersistencePort.createUser(userModelRequest);
+            userPersistencePort.createUser(userModel);
         }
 
     }

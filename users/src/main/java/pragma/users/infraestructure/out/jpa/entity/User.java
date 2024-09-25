@@ -2,24 +2,20 @@ package pragma.users.infraestructure.out.jpa.entity;
 
 import jakarta.persistence.*;
 
-import lombok.Data;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Collection;
-import java.util.List;
 
 
-@Data
+
+
 @Entity
 @Table(name = "User", uniqueConstraints = {@UniqueConstraint(columnNames = "email")})
-public class User  implements UserDetails {
+public class User  implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
 
     @Column(name = "firstName", nullable = false, length = 50)
     private String firstName;
@@ -27,7 +23,7 @@ public class User  implements UserDetails {
     @Column(name = "lastName", nullable = false, length = 50)
     private String lastName;
 
-    @Column(name = "identityDocument", nullable = false, length = 20)
+    @Column(name = "identityDocument", nullable = false, length = 20, unique = true)
     private String identityDocument;
 
     @Column(name = "phoneNumber", nullable = false, length = 13)
@@ -36,7 +32,7 @@ public class User  implements UserDetails {
     @Column(name = "birthDate", nullable = false)
     private LocalDate birthDate;
 
-    @Column(name = "email", nullable = false, length = 100)
+    @Column(name = "email", nullable = false, length = 100, unique = true)
     private String email;
 
     @Column(name = "password", nullable = false, length = 255)
@@ -52,6 +48,7 @@ public class User  implements UserDetails {
     @Column(name = "updated_at", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP")
     private LocalDateTime updatedAt;
 
+
     public User(Role role, String password, String email, LocalDate birthDate, String phoneNumber, String identityDocument, String lastName, String firstName) {
         this.role = role;
         this.password = password;
@@ -62,10 +59,8 @@ public class User  implements UserDetails {
         this.lastName = lastName;
         this.firstName = firstName;
     }
-
     public User() {
     }
-
     @PrePersist
     protected void onCreate() {
         createdAt = LocalDateTime.now();
@@ -77,41 +72,75 @@ public class User  implements UserDetails {
     }
 
 
-
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(role);
+    public Integer getId() {
+        return id;
     }
 
-    @Override
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getIdentityDocument() {
+        return identityDocument;
+    }
+
+    public void setIdentityDocument(String identityDocument) {
+        this.identityDocument = identityDocument;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public LocalDate getBirthDate() {
+        return birthDate;
+    }
+
+    public void setBirthDate(LocalDate birthDate) {
+        this.birthDate = birthDate;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     public String getPassword() {
         return password;
     }
 
-    @Override
-    public String getUsername() {
-        return email;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
-    @Override
-    public boolean isAccountNonExpired() {
-        return true;
+    public Role getRole() {
+        return role;
     }
 
-    @Override
-    public boolean isAccountNonLocked() {
-        return true;
+    public void setRole(Role role) {
+        this.role = role;
     }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return true;
-    }
-
-
-    }
+}

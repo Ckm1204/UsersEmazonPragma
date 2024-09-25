@@ -19,9 +19,9 @@ public class UserRestController {
         this.userService = userService;
     }
 
-    @PostMapping("")
+    @PostMapping("registroAdmin")
     public ResponseEntity<Void> saveCategoryInStock(@RequestBody UserRequestDTO userRequestDTO) {
-        userService.createUserAdmin(userRequestDTO);
+        userService.createUserAuxBodega(userRequestDTO);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 

@@ -1,17 +1,17 @@
 package pragma.users.infraestructure.out.jpa.entity;
 
 import jakarta.persistence.*;
-import org.springframework.security.core.GrantedAuthority;
 
 import java.time.LocalDateTime;
 
+
 @Entity
 @Table(name = "Role", uniqueConstraints = {@UniqueConstraint(columnNames = "name")})
-public class Role implements GrantedAuthority {
+public class Role  {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
 
     @Column(name = "name", nullable = false, length = 50)
     private String name;
@@ -37,7 +37,7 @@ public class Role implements GrantedAuthority {
 
     // constructor
 
-    public Role(Long id, String name, String description, LocalDateTime createdAt, LocalDateTime updatedAt) {
+    public Role(Integer id, String name, String description, LocalDateTime createdAt, LocalDateTime updatedAt) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -48,11 +48,11 @@ public class Role implements GrantedAuthority {
     }
     // Getters and Setters
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -88,8 +88,5 @@ public class Role implements GrantedAuthority {
         this.updatedAt = updatedAt;
     }
 
-    @Override
-    public String getAuthority() {
-        return name;
-    }
+
 }

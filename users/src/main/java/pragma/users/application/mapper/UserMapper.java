@@ -2,7 +2,7 @@ package pragma.users.application.mapper;
 
 import org.mapstruct.Mapping;
 import pragma.users.application.dto.request.UserRequestDTO;
-import pragma.users.domain.model.request.UserModelRequest;
+import pragma.users.domain.model.UserModel;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
 
@@ -13,8 +13,8 @@ import org.mapstruct.ReportingPolicy;
 public interface UserMapper {
 
     @Mapping(target = "role", expression = "java(1)")
-    UserModelRequest toUserModelAdmin(UserRequestDTO userRequestDTO);
+    UserModel toUserModelAdmin(UserRequestDTO userRequestDTO);
 
     @Mapping(target = "role", expression = "java(2)")
-    UserModelRequest toUserModelAuxBodega(UserRequestDTO userRequestDTO);
+    UserModel toUserModelAuxBodega(UserRequestDTO userRequestDTO);
 }

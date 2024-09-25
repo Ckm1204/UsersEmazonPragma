@@ -1,9 +1,9 @@
-package pragma.users.domain.model.request;
+package pragma.users.domain.model;
 
 import java.time.LocalDate;
 
-public class UserModelRequest {
-
+public class UserModel {
+    private Integer id;
     private String firstName;
     private String lastName;
     private String identityDocument;
@@ -14,10 +14,11 @@ public class UserModelRequest {
     private Integer role;
 
 
-    public UserModelRequest() {
+    public UserModel() {
     }
 
-    public UserModelRequest(String firstName, String lastName, String identityDocument, String phoneNumber, LocalDate birthDate, String email, String password, Integer role) {
+    public UserModel(Integer id, String firstName, String lastName, String identityDocument, String phoneNumber, LocalDate birthDate, String email, String password, Integer role) {
+        this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.identityDocument = identityDocument;
@@ -26,6 +27,14 @@ public class UserModelRequest {
         this.email = email;
         this.password = password;
         this.role = role;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getFirstName() {
