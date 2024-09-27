@@ -1,4 +1,4 @@
-package pragma.users.infraestructure.configuration.jwtUtil;
+package pragma.users.infraestructure.configuration.jwtConfiguration;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Header;

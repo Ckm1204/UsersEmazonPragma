@@ -12,7 +12,7 @@ public class OpenApiConfig {
     public OpenAPI customOpenAPI() {
         return new OpenAPI()
                 .info(new Info()
-                        .title("Eamazon User API")
+                        .title("Eamazon Users API")
                         .version("1.0")
                         .description("Documentación de la API de Eamazon Stock"));
     }

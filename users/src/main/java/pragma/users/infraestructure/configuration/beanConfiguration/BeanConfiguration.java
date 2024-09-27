@@ -17,7 +17,7 @@ import pragma.users.domain.usecase.AuthUseCase;
 import pragma.users.domain.usecase.RoleUseCase;
 import pragma.users.domain.usecase.UserUseCase;
 import pragma.users.infraestructure.EncryptionService;
-import pragma.users.infraestructure.configuration.jwtUtil.JwtService;
+import pragma.users.infraestructure.configuration.jwtConfiguration.JwtService;
 import pragma.users.infraestructure.out.jpa.adapter.AuthAdapter;
 import pragma.users.infraestructure.out.jpa.adapter.RoleJpaAdapter;
 import pragma.users.infraestructure.out.jpa.adapter.UserJpaAdapter;

@@ -17,19 +17,19 @@ public class User  implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "firstName", nullable = false, length = 50)
+    @Column(name = "first_name", nullable = false, length = 50)
     private String firstName;
 
-    @Column(name = "lastName", nullable = false, length = 50)
+    @Column(name = "last_name", nullable = false, length = 50)
     private String lastName;
 
-    @Column(name = "identityDocument", nullable = false, length = 20, unique = true)
+    @Column(name = "identity_document", nullable = false, length = 20, unique = true)
     private String identityDocument;
 
-    @Column(name = "phoneNumber", nullable = false, length = 13)
+    @Column(name = "phone_number", nullable = false, length = 13)
     private String phoneNumber;
 
-    @Column(name = "birthDate", nullable = false)
+    @Column(name = "birth_date", nullable = false)
     private LocalDate birthDate;
 
     @Column(name = "email", nullable = false, length = 100, unique = true)
@@ -39,7 +39,7 @@ public class User  implements Serializable {
     private String password;
 
     @ManyToOne
-    @JoinColumn(name = "roleId", nullable = false)
+    @JoinColumn(name = "role_id", nullable = false)
     private Role role;
 
     @Column(name = "created_at", updatable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")

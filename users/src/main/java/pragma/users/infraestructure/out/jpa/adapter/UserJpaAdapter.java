@@ -1,13 +1,11 @@
 package pragma.users.infraestructure.out.jpa.adapter;
 
 
-import lombok.RequiredArgsConstructor;
 import org.springframework.transaction.annotation.Transactional;
 import pragma.users.domain.model.UserModel;
 import pragma.users.domain.spi.IUserPersistencePort;
 import pragma.users.infraestructure.out.jpa.mapper.UserMapperJPA;
 import pragma.users.infraestructure.out.jpa.entity.User;
-import pragma.users.infraestructure.out.jpa.repository.IRoleRepository;
 import pragma.users.infraestructure.out.jpa.repository.IUserRepository;
 
 import java.util.Optional;
@@ -38,13 +36,16 @@ public class UserJpaAdapter implements IUserPersistencePort {
     }
 
     @Override
-    public Boolean existsUserByEmail(String email) {
-        return userRepository.findByEmail(email).isPresent();
+    public Optional<UserModel> findByIdentityDocument(String identityDocument) {
+        Optional<User>  user = userRepository.findByIdentityDocument(identityDocument);
+        return userEntityMapper.toUserModelOptional(user) ;
     }
 
+
     @Override
-    public Boolean existsUserByPhoneNumber(String phoneNumber) {
-        return null;
+    public Optional<UserModel> findByPhoneNumber(String phoneNumber) {
+        Optional<User> user = userRepository.findByPhoneNumber(phoneNumber);
+        return userEntityMapper.toUserModelOptional(user);
     }
 
 

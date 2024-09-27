@@ -9,10 +9,9 @@ public interface IUserPersistencePort {
 
     Optional<User> findByEmail(String email);
     void createUser(UserModel userModel);
+    Optional<UserModel> findByIdentityDocument(String identityDocument);
+    Optional<UserModel> findByPhoneNumber(String phoneNumber);
 
-    Boolean existsUserByEmail (String email);
-    // method para verificar si el numero de telefono ya esta registrado
-    Boolean existsUserByPhoneNumber (String phoneNumber);
 
 
 }

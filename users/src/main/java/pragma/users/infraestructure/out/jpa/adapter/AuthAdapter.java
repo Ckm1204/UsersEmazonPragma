@@ -1,7 +1,6 @@
 package pragma.users.infraestructure.out.jpa.adapter;
 
 
-import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -10,8 +9,8 @@ import pragma.users.domain.model.RoleModel;
 import pragma.users.domain.model.UserModel;
 import pragma.users.domain.spi.IAuthPersistencePort;
 import pragma.users.domain.spi.IRolePersistencePort;
-import pragma.users.infraestructure.configuration.jwtUtil.AuthConstants;
-import pragma.users.infraestructure.configuration.jwtUtil.JwtService;
+import pragma.users.infraestructure.configuration.jwtConfiguration.AuthConstants;
+import pragma.users.infraestructure.configuration.jwtConfiguration.JwtService;
 import pragma.users.infraestructure.out.jpa.entity.CustomUserDetails;
 
 import java.util.HashMap;

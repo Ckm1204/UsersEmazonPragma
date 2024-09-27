@@ -1,4 +1,4 @@
-package pragma.users.infraestructure.configuration.jwtUtil;
+package pragma.users.infraestructure.configuration.jwtConfiguration;
 
 public class AuthConstants {
 

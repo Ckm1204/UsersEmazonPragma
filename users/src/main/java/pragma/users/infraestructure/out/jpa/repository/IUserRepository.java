@@ -15,4 +15,8 @@ public interface IUserRepository extends JpaRepository<User, Integer> {
     // method para verificar si el numero de telefono ya esta registrado
     Boolean existsUserByPhoneNumber (String phoneNumber);
 
+    Optional<User> findByPhoneNumber(String phoneNumber);
+
+    Optional<User> findByIdentityDocument(String identityDocument);
+
 }

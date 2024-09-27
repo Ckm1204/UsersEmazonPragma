@@ -24,7 +24,6 @@ public class UserService implements IUserService {
 
     @Override
     public void createUserAdmin(UserRequestDTO userRequestDTO) {
-        userRequestDTO.setPassword(passwordEncoder.encode(userRequestDTO.getPassword()));
         userServicePort.saveUser(userMapper.toUserModelAdmin(userRequestDTO));
     }
 
