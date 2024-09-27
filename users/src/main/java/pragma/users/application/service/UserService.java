@@ -24,6 +24,7 @@ public class UserService implements IUserService {
 
     @Override
     public void createUserAdmin(UserRequestDTO userRequestDTO) {
+        userRequestDTO.setRole(1);
         userServicePort.saveUser(userMapper.toUserModelAdmin(userRequestDTO));
     }
 

@@ -19,6 +19,7 @@ public class UserRequestDTO {
     private LocalDate birthDate;
     private String email;
     private String password;
+
     private Integer role;
 
     public UserRequestDTO() {

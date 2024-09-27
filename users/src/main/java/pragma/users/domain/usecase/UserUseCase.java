@@ -6,9 +6,7 @@ import pragma.users.domain.model.UserModel;
 import pragma.users.domain.spi.IRolePersistencePort;
 import pragma.users.domain.spi.IUserPersistencePort;
 import pragma.users.domain.usecase.validateConstants.CreateUserValidationConstants;
-import pragma.users.infraestructure.exceptions.AgeValidationException;
-import pragma.users.infraestructure.exceptions.EmailValidationException;
-import pragma.users.infraestructure.exceptions.PhoneNumberValidation;
+import pragma.users.infraestructure.exceptions.*;
 import pragma.users.infraestructure.out.jpa.entity.User;
 
 import java.time.LocalDate;
@@ -111,50 +109,50 @@ public class UserUseCase implements IUserServicePort {
 
     public static void validateFirstName(String firstName) {
         if (firstName == null || firstName.isEmpty()) {
-            throw new IllegalArgumentException(CreateUserValidationConstants.NAME_NOT_NULL_EXCEPTION); // Retorna false si el String es nulo o vacío
+            throw new FirstNameValidation(CreateUserValidationConstants.NAME_NOT_NULL_EXCEPTION); // Retorna false si el String es nulo o vacío
         }
         if (firstName.length() < 2) {
-            throw new IllegalArgumentException(CreateUserValidationConstants.NAME_MIN_SIZE_EXCEPTION);
+            throw new FirstNameValidation(CreateUserValidationConstants.NAME_MIN_SIZE_EXCEPTION);
         }
         if (firstName.length() > 50) {
-            throw new IllegalArgumentException(CreateUserValidationConstants.NAME_MAX_SIZE_EXCEPTION);
+            throw new FirstNameValidation(CreateUserValidationConstants.NAME_MAX_SIZE_EXCEPTION);
         }
     }
 
     public static void validateLastName(String lastName) {
         if (lastName == null || lastName.isEmpty()) {
-            throw new IllegalArgumentException(CreateUserValidationConstants.LAST_NAME_NULL_EXCEPTION); // Retorna false si el String es nulo o vacío
+            throw new LastNameValidation(CreateUserValidationConstants.LAST_NAME_NULL_EXCEPTION); // Retorna false si el String es nulo o vacío
         }
         if (lastName.length() < 2) {
-            throw new IllegalArgumentException(CreateUserValidationConstants.LAST_NAME_MIN_SIZE_EXCEPTION);
+            throw new LastNameValidation(CreateUserValidationConstants.LAST_NAME_MIN_SIZE_EXCEPTION);
         }
         if (lastName.length() > 50) {
-            throw new IllegalArgumentException(CreateUserValidationConstants.LAST_NAME_MAX_SIZE_EXCEPTION);
+            throw new LastNameValidation(CreateUserValidationConstants.LAST_NAME_MAX_SIZE_EXCEPTION);
         }
     }
 
     public static void validatePassword(String password) {
         if (password == null || password.isEmpty()) {
-            throw new IllegalArgumentException(CreateUserValidationConstants.PASSWORD_NULL_EXCEPTION); // Retorna false si el String es nulo o vacío
+            throw new PasswordValidation(CreateUserValidationConstants.PASSWORD_NULL_EXCEPTION); // Retorna false si el String es nulo o vacío
         }
         if (password.length() < 5) {
-            throw new IllegalArgumentException(CreateUserValidationConstants.PASSWORD_MIN_SIZE_EXCEPTION);
+            throw new PasswordValidation(CreateUserValidationConstants.PASSWORD_MIN_SIZE_EXCEPTION);
         }
         if (password.length() > 20) {
-            throw new IllegalArgumentException(CreateUserValidationConstants.PASSWORD_MAX_SIZE_EXCEPTION);
+            throw new PasswordValidation(CreateUserValidationConstants.PASSWORD_MAX_SIZE_EXCEPTION);
         }
     }
 
     public static void validateIdentityDocument(String identityDocument) {
 
         if (identityDocument == null || identityDocument.isEmpty()) {
-            throw new IllegalArgumentException(CreateUserValidationConstants.IDENTITY_DOCUMENT_NULL_EXCEPTION); // Retorna false si el String es nulo o vacío
+            throw new IdentityDocumentValidation(CreateUserValidationConstants.IDENTITY_DOCUMENT_NULL_EXCEPTION); // Retorna false si el String es nulo o vacío
         }
         if (identityDocument.length() < 8) {
-            throw new IllegalArgumentException(CreateUserValidationConstants.IDENTITY_DOCUMENT_MIN_SIZE_EXCEPTION);
+            throw new IdentityDocumentValidation(CreateUserValidationConstants.IDENTITY_DOCUMENT_MIN_SIZE_EXCEPTION);
         }
         if (identityDocument.length() > 13) {
-            throw new IllegalArgumentException(CreateUserValidationConstants.IDENTITY_DOCUMENT_MAX_SIZE_EXCEPTION);
+            throw new IdentityDocumentValidation(CreateUserValidationConstants.IDENTITY_DOCUMENT_MAX_SIZE_EXCEPTION);
         }
 
     }
@@ -187,7 +185,7 @@ public class UserUseCase implements IUserServicePort {
         }
 
         if (userPersistencePort.findByIdentityDocument(userModel.getIdentityDocument()).isPresent()) {
-            throw new IllegalArgumentException(CreateUserValidationConstants.IDENTITY_DOCUMENT_EXISTS_EXCEPTION);
+            throw new IdentityDocumentValidation(CreateUserValidationConstants.IDENTITY_DOCUMENT_EXISTS_EXCEPTION);
         }
     }
 
