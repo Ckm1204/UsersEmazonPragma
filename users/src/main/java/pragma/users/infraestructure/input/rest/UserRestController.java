@@ -21,13 +21,13 @@ public class UserRestController {
     }
 
     @PostMapping("admin")
-    public ResponseEntity<Void> saveUserAdmin(@RequestBody @Valid UserRequestDTO userRequestDTO) {
+    public ResponseEntity<Void> saveUserAdmin(@RequestBody  UserRequestDTO userRequestDTO) {
         userService.createUserAdmin(userRequestDTO);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
     @PostMapping("auxBodega")
-    public ResponseEntity<Void> saveUserAuxBodega(@RequestBody @Valid UserRequestDTO userRequestDTO) {
+    public ResponseEntity<Void> saveUserAuxBodega(@RequestBody  UserRequestDTO userRequestDTO) {
         userService.createUserAuxBodega(userRequestDTO);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
