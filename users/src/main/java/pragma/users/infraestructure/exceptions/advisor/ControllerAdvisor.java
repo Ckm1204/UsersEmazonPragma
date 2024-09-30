@@ -20,16 +20,7 @@ import java.util.Map;
 @RestControllerAdvice
 public class ControllerAdvisor extends ResponseEntityExceptionHandler {
 
-    /*@ExceptionHandler(UserAlreadyExistException.class)
-    public ResponseEntity<ExceptionResponse> handleUserAlreadyExistException(UserAlreadyExistException ex){
-        return ResponseEntity.status(HttpStatus.CONFLICT).body(new ExceptionResponse(String.format(USER_ALREADY_EXISTS_EXCEPTION_MESSAGE),HttpStatus.CONFLICT.toString(), LocalDateTime.now()));
-    }*/
 
-    /*@ExceptionHandler(AuthenticationException.class)
-    public ResponseEntity<ExceptionResponse> handleAuthenticationException(AuthenticationException ex){
-        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new ExceptionResponse(String.format(ex.getMessage()),HttpStatus.NOT_FOUND.toString(), LocalDateTime.now()));
-    }
-*/
     @ExceptionHandler(FirstNameValidation.class)
     public ResponseEntity<ExceptionResponse> handleFirstNameValidationException(FirstNameValidation ex){
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ExceptionResponse(String.format(ex.getMessage()),HttpStatus.BAD_REQUEST.toString(), LocalDateTime.now()));

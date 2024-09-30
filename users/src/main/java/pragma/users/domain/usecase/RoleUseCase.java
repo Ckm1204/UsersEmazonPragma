@@ -13,7 +13,6 @@ public class RoleUseCase implements IRoleSerivePort {
 
     @Override
     public Integer getRoleId(String roleName) {
-        // TODO Auto-generated method stub
-        return 0;
+        return rolePersistencePort.getRoleId(roleName);
     }
 }

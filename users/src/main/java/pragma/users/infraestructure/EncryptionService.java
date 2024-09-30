@@ -7,7 +7,6 @@ public class EncryptionService implements IEncryptionServicePort {
 
     private final PasswordEncoder passwordEncoder;
 
-
     public EncryptionService(PasswordEncoder passwordEncoder) {
         this.passwordEncoder = passwordEncoder;
     }
@@ -21,4 +20,5 @@ public class EncryptionService implements IEncryptionServicePort {
     public boolean verify(String password, String encodedPassword) {
         return passwordEncoder.matches(password, encodedPassword);
     }
+
 }

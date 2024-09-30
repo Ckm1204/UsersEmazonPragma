@@ -5,7 +5,7 @@ import pragma.users.domain.api.IUserServicePort;
 import pragma.users.domain.model.UserModel;
 import pragma.users.domain.spi.IRolePersistencePort;
 import pragma.users.domain.spi.IUserPersistencePort;
-import pragma.users.domain.usecase.validateConstants.CreateUserValidationConstants;
+import pragma.users.domain.usecase.validateConstants.UserValidationConstants;
 import pragma.users.infraestructure.exceptions.*;
 import pragma.users.infraestructure.out.jpa.entity.User;
 
@@ -58,29 +58,29 @@ public class UserUseCase implements IUserServicePort {
 
     public static void isAdultValidate(LocalDate fechaNacimiento) {
         if (fechaNacimiento == null) {
-            throw new AgeValidationException(CreateUserValidationConstants.BIRTH_DATE_NULL_EXCEPTION) ;} // Retorna false si la fecha es nula
+            throw new AgeValidationException(UserValidationConstants.BIRTH_DATE_NULL_EXCEPTION) ;} // Retorna false si la fecha es nula
         LocalDate hoy = LocalDate.now(); // Fecha actual
         Period edad = Period.between(fechaNacimiento, hoy); // Calcula la diferencia
         if (edad.getYears() < 18){
-            throw new AgeValidationException(CreateUserValidationConstants.BIRT_DATE_ADULT) ;
+            throw new AgeValidationException(UserValidationConstants.BIRT_DATE_ADULT) ;
         } // Retorna true si tiene 18 años o más
     }
 
     public static void validatePhoneNumber(String input) {
         // Verifica si el String es nulo o vacío
         if (input == null || input.isEmpty()) {
-            throw new PhoneNumberValidation(CreateUserValidationConstants.PHONE_NULL_EXCEPTION);
+            throw new PhoneNumberValidation(UserValidationConstants.PHONE_NULL_EXCEPTION);
         }
 
         String regex = "^\\+?[\\d+]{1,13}$"; // Patrón para validar el número de teléfono
         if (!input.matches(regex)) {
-            throw new PhoneNumberValidation(CreateUserValidationConstants.PHONE_VALID);
+            throw new PhoneNumberValidation(UserValidationConstants.PHONE_VALID);
         }
 
         if (input.length() < 10) {
-            throw new PhoneNumberValidation(CreateUserValidationConstants.PHONE_MIN_SIZE_EXCEPTION);
+            throw new PhoneNumberValidation(UserValidationConstants.PHONE_MIN_SIZE_EXCEPTION);
         } else if (input.length() > 13) {
-            throw new PhoneNumberValidation(CreateUserValidationConstants.PHONE_MAX_SIZE_EXCEPTION);
+            throw new PhoneNumberValidation(UserValidationConstants.PHONE_MAX_SIZE_EXCEPTION);
         }
         // Comprobar cada carácter del String
         /*for (char c : input.toCharArray()) {
@@ -93,66 +93,66 @@ public class UserUseCase implements IUserServicePort {
 
     public static void validateEmail(String email) {
         if (email == null || email.isEmpty()) {
-            throw new EmailValidationException(CreateUserValidationConstants.EMAIL_NULL_EXCEPTION); // Retorna false si el String es nulo o vacío
+            throw new EmailValidationException(UserValidationConstants.EMAIL_NULL_EXCEPTION); // Retorna false si el String es nulo o vacío
         }
-        if(CreateUserValidationConstants.EMAIL_PATTERN.matches(email)) {
-            throw new EmailValidationException(CreateUserValidationConstants.EMAIL_VALID);
+        if(UserValidationConstants.EMAIL_PATTERN.matches(email)) {
+            throw new EmailValidationException(UserValidationConstants.EMAIL_VALID);
         }// Verifica si el email coincide con el patrón
         if (email.length() < 5) {
-            throw new EmailValidationException(CreateUserValidationConstants.EMAIL_MIN_SIZE_EXCEPTION);
+            throw new EmailValidationException(UserValidationConstants.EMAIL_MIN_SIZE_EXCEPTION);
         }
         if (email.length() > 250) {
-            throw new EmailValidationException(CreateUserValidationConstants.EMAIL_MAX_SIZE_EXCEPTION);
+            throw new EmailValidationException(UserValidationConstants.EMAIL_MAX_SIZE_EXCEPTION);
         }
 
     }
 
     public static void validateFirstName(String firstName) {
         if (firstName == null || firstName.isEmpty()) {
-            throw new FirstNameValidation(CreateUserValidationConstants.NAME_NOT_NULL_EXCEPTION); // Retorna false si el String es nulo o vacío
+            throw new FirstNameValidation(UserValidationConstants.NAME_NOT_NULL_EXCEPTION); // Retorna false si el String es nulo o vacío
         }
         if (firstName.length() < 2) {
-            throw new FirstNameValidation(CreateUserValidationConstants.NAME_MIN_SIZE_EXCEPTION);
+            throw new FirstNameValidation(UserValidationConstants.NAME_MIN_SIZE_EXCEPTION);
         }
         if (firstName.length() > 50) {
-            throw new FirstNameValidation(CreateUserValidationConstants.NAME_MAX_SIZE_EXCEPTION);
+            throw new FirstNameValidation(UserValidationConstants.NAME_MAX_SIZE_EXCEPTION);
         }
     }
 
     public static void validateLastName(String lastName) {
         if (lastName == null || lastName.isEmpty()) {
-            throw new LastNameValidation(CreateUserValidationConstants.LAST_NAME_NULL_EXCEPTION); // Retorna false si el String es nulo o vacío
+            throw new LastNameValidation(UserValidationConstants.LAST_NAME_NULL_EXCEPTION); // Retorna false si el String es nulo o vacío
         }
         if (lastName.length() < 2) {
-            throw new LastNameValidation(CreateUserValidationConstants.LAST_NAME_MIN_SIZE_EXCEPTION);
+            throw new LastNameValidation(UserValidationConstants.LAST_NAME_MIN_SIZE_EXCEPTION);
         }
         if (lastName.length() > 50) {
-            throw new LastNameValidation(CreateUserValidationConstants.LAST_NAME_MAX_SIZE_EXCEPTION);
+            throw new LastNameValidation(UserValidationConstants.LAST_NAME_MAX_SIZE_EXCEPTION);
         }
     }
 
     public static void validatePassword(String password) {
         if (password == null || password.isEmpty()) {
-            throw new PasswordValidation(CreateUserValidationConstants.PASSWORD_NULL_EXCEPTION); // Retorna false si el String es nulo o vacío
+            throw new PasswordValidation(UserValidationConstants.PASSWORD_NULL_EXCEPTION); // Retorna false si el String es nulo o vacío
         }
         if (password.length() < 5) {
-            throw new PasswordValidation(CreateUserValidationConstants.PASSWORD_MIN_SIZE_EXCEPTION);
+            throw new PasswordValidation(UserValidationConstants.PASSWORD_MIN_SIZE_EXCEPTION);
         }
         if (password.length() > 20) {
-            throw new PasswordValidation(CreateUserValidationConstants.PASSWORD_MAX_SIZE_EXCEPTION);
+            throw new PasswordValidation(UserValidationConstants.PASSWORD_MAX_SIZE_EXCEPTION);
         }
     }
 
     public static void validateIdentityDocument(String identityDocument) {
 
         if (identityDocument == null || identityDocument.isEmpty()) {
-            throw new IdentityDocumentValidation(CreateUserValidationConstants.IDENTITY_DOCUMENT_NULL_EXCEPTION); // Retorna false si el String es nulo o vacío
+            throw new IdentityDocumentValidation(UserValidationConstants.IDENTITY_DOCUMENT_NULL_EXCEPTION); // Retorna false si el String es nulo o vacío
         }
         if (identityDocument.length() < 8) {
-            throw new IdentityDocumentValidation(CreateUserValidationConstants.IDENTITY_DOCUMENT_MIN_SIZE_EXCEPTION);
+            throw new IdentityDocumentValidation(UserValidationConstants.IDENTITY_DOCUMENT_MIN_SIZE_EXCEPTION);
         }
         if (identityDocument.length() > 13) {
-            throw new IdentityDocumentValidation(CreateUserValidationConstants.IDENTITY_DOCUMENT_MAX_SIZE_EXCEPTION);
+            throw new IdentityDocumentValidation(UserValidationConstants.IDENTITY_DOCUMENT_MAX_SIZE_EXCEPTION);
         }
 
     }
@@ -177,15 +177,15 @@ public class UserUseCase implements IUserServicePort {
     private void existValidator(UserModel userModel) {
 
         if (userPersistencePort.findByEmail(userModel.getEmail()).isPresent()) {
-            throw new EmailValidationException(CreateUserValidationConstants.EMAIL_EXISTS_EXCEPTION);
+            throw new EmailValidationException(UserValidationConstants.EMAIL_EXISTS_EXCEPTION);
         }
 
         if (userPersistencePort.findByPhoneNumber(userModel.getPhoneNumber()).isPresent()) {
-            throw new PhoneNumberValidation(CreateUserValidationConstants.PHONE_EXISTS_EXCEPTION);
+            throw new PhoneNumberValidation(UserValidationConstants.PHONE_EXISTS_EXCEPTION);
         }
 
         if (userPersistencePort.findByIdentityDocument(userModel.getIdentityDocument()).isPresent()) {
-            throw new IdentityDocumentValidation(CreateUserValidationConstants.IDENTITY_DOCUMENT_EXISTS_EXCEPTION);
+            throw new IdentityDocumentValidation(UserValidationConstants.IDENTITY_DOCUMENT_EXISTS_EXCEPTION);
         }
     }
 

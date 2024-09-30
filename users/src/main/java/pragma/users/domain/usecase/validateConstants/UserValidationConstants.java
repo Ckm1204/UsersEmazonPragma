@@ -1,8 +1,6 @@
 package pragma.users.domain.usecase.validateConstants;
 
-import java.util.regex.Pattern;
-
-public class CreateUserValidationConstants {
+public class UserValidationConstants {
 
 
     public static final String NAME_NOT_NULL_EXCEPTION = "Name is required";
@@ -49,8 +47,10 @@ public class CreateUserValidationConstants {
     public static final String EMAIL_REGEX = "^[\\w-\\.]+@[\\w-]+\\.[a-z]{2,}$";
     public static final String EMAIL_PATTERN = "^[\\w!#$%&'*+/=?`{|}~^.-]+@[\\w.-]+\\.[a-zA-Z]{2,}$" ;
 
+    public static final String INVALID_CREDENTIALS_MESSAGE = "Invalid credentials";
 
-    private CreateUserValidationConstants() {
+
+    private UserValidationConstants() {
         throw new IllegalStateException("Utility class");
     }
 
