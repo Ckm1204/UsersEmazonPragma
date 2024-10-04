@@ -15,8 +15,14 @@ public interface UserMapper {
     @Mapping(target = "role", expression = "java(1)")
     UserModel toUserModelAdmin(UserRequestDTO userRequestDTO);
 
+
+
     @Mapping(target = "role", expression = "java(2)")
     UserModel toUserModelAuxBodega(UserRequestDTO userRequestDTO);
+
+
+
+
 
     @Mapping(target = "role", expression = "java(3)")
     UserModel toUSer(UserRequestDTO userRequestDTO);
