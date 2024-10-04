@@ -24,7 +24,6 @@ public class UserService implements IUserService {
 
     @Override
     public void createUserAdmin(UserRequestDTO userRequestDTO) {
-        userRequestDTO.setRole(1);
         userServicePort.saveUser(userMapper.toUserModelAdmin(userRequestDTO));
     }
 
@@ -32,4 +31,11 @@ public class UserService implements IUserService {
     public void createUserAuxBodega(UserRequestDTO userRequestDTO) {
         userServicePort.saveUser(userMapper.toUserModelAuxBodega(userRequestDTO));
     }
+
+    @Override
+    public void createUser(UserRequestDTO userRequestDTO) {
+        userServicePort.saveUser(userMapper.toUSer(userRequestDTO));
+    }
+
+
 }

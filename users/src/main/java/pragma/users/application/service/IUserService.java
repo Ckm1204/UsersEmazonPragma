@@ -7,5 +7,6 @@ public interface IUserService {
 
     void createUserAdmin(UserRequestDTO userRequestDTO);
     void createUserAuxBodega(UserRequestDTO userRequestDTO);
+    void createUser(UserRequestDTO userRequestDTO);
 
 }

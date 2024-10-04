@@ -1,6 +1,5 @@
 package pragma.users.application.dto.response;
 
-import lombok.Data;
 
 
 public class AuthenticationResponse {
