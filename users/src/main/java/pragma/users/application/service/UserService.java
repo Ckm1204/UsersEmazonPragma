@@ -27,10 +27,15 @@ public class UserService implements IUserService {
         userServicePort.saveUser(userMapper.toUserModelAdmin(userRequestDTO));
     }
 
+
+
     @Override
     public void createUserAuxBodega(UserRequestDTO userRequestDTO) {
         userServicePort.saveUser(userMapper.toUserModelAuxBodega(userRequestDTO));
     }
+
+
+
 
     @Override
     public void createUser(UserRequestDTO userRequestDTO) {

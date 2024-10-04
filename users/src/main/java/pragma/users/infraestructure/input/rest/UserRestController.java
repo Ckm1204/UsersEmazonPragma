@@ -28,12 +28,17 @@ public class UserRestController {
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
+
+
+
     @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("auxBodega")
     public ResponseEntity<Void> saveUserAuxBodega(@RequestBody  UserRequestDTO userRequestDTO) {
         userService.createUserAuxBodega(userRequestDTO);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
+
+
 
     @PostMapping("user")
     public ResponseEntity<Void> saveUser(@RequestBody  UserRequestDTO userRequestDTO) {
