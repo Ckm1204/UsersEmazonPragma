@@ -54,6 +54,7 @@ public class ControllerAdvisor extends ResponseEntityExceptionHandler {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ExceptionResponse(String.format(ex.getMessage()),HttpStatus.BAD_REQUEST.toString(), LocalDateTime.now()));
     }
 
+
     @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatusCode status, WebRequest request) {
         Map<String,Object> errors = new HashMap<>();
